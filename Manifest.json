@@ -9,7 +9,7 @@
     "16": "icon16.png"
   },
   "background": {
-    "service_worker": "src/background.js"
+    "service_worker": "src/bg.js"
   },
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": ["https://*/*"],

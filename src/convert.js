@@ -23,7 +23,6 @@ function highlightText(sentenceText) {
 }
 
 function main() {
-  // check if we have already highlighted the text
   const boldedElements = document.getElementsByTagName("br-bold")
   if (boldedElements.length > 0) {
     for (const element of boldedElements) {

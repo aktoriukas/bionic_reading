@@ -1,7 +1,7 @@
 // Initialize button with user's preferred color
-let changeColor = document.getElementById("changeColor")
+let btn_active = document.getElementById("btn_active")
 
-changeColor.addEventListener("click", async () => {
+btn_active.addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
 
   chrome.scripting.executeScript({
