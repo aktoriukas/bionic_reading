@@ -1,4 +1,3 @@
-// Initialize button with user's preferred color
 let btn_active = document.getElementById("btn_active")
 
 btn_active.addEventListener("click", async () => {
