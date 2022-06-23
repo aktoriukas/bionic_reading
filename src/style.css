@@ -1,5 +1,5 @@
-body {
-  padding: 10px;
+body .container {
+  padding: 20px;
   min-width: 170px;
 
   display: flex;
@@ -7,16 +7,31 @@ body {
   align-items: center;
   justify-content: center;
 }
+body {
+  background: linear-gradient(to right, #868f96, #596164);
+  margin: 2px;
+}
 
 button {
   padding: 10px;
   border: none;
   border-radius: 10px;
-  color: white;
+  color: rgb(121, 190, 190);
   cursor: pointer;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   background-color: #181a25;
 }
 button:hover {
   background-color: #2b2b31;
+}
+h1 {
+  margin-top: 0 !important;
+}
+p {
+  margin-bottom: 0 !important;
+  font-size: 10px;
+}
+a {
+  color: rgb(121, 190, 190);
+  text-decoration: none;
 }
