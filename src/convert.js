@@ -25,9 +25,11 @@ function highlightText(sentenceText) {
 function main() {
   const boldedElements = document.getElementsByTagName("br-bold")
   if (boldedElements.length > 0) {
+    const active = document.documentElement.dataset.bionicReadingActive !== "true"
     for (const element of boldedElements) {
-      element.classList.toggle("br-bold")
+      element.classList.toggle("br-bold", active)
     }
+    document.documentElement.dataset.bionicReadingActive = active
     return
   }
 
@@ -50,6 +52,7 @@ function main() {
       element.innerHTML = textArrTransformed.join(" ")
     }
   })
+  document.documentElement.dataset.bionicReadingActive = "true"
 }
 
 main()

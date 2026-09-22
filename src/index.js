@@ -1,26 +1,62 @@
-let btn_active = document.getElementById("bionic_reading_btn")
-const readingActive = document.cookie.includes("bionic_reading_active=true")
-if (readingActive) {
-  btn_active.innerText = "Deactivate"
-} else {
-  btn_active.innerText = "Activate"
+const button = document.getElementById("bionic_reading_btn")
+const persist = document.getElementById("persist_across_pages")
+
+async function currentTab() {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  return tab
 }
 
-btn_active.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+async function isActive(tabId) {
+  const [{ result = false } = {}] = await chrome.scripting.executeScript({
+    target: { tabId },
+    func: () => document.documentElement.dataset.bionicReadingActive === "true",
+  })
+  return result
+}
 
-  const readingActive = document.cookie.includes("bionic_reading_active=true")
-
-  if (readingActive) {
-    btn_active.innerText = "Activate"
-    document.cookie = "bionic_reading_active=false"
-  } else {
-    btn_active.innerText = "Deactivate"
-    document.cookie = "bionic_reading_active=true"
-  }
-
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id, allFrames: true },
+async function toggle(tabId) {
+  await chrome.scripting.executeScript({
+    target: { tabId, allFrames: true },
     files: ["src/convert.js"],
   })
+}
+
+async function render() {
+  const tab = await currentTab()
+  if (!tab?.id) return
+
+  try {
+    const active = await isActive(tab.id)
+    button.dataset.active = active
+    button.textContent = active ? "Turn off" : "Turn on"
+  } catch {
+    button.textContent = "Unavailable on this page"
+    button.disabled = true
+  }
+}
+
+button.addEventListener("click", async () => {
+  const tab = await currentTab()
+  if (!tab?.id) return
+
+  await toggle(tab.id)
+  await render()
 })
+
+persist.addEventListener("change", async () => {
+  await chrome.storage.sync.set({ persistAcrossPages: persist.checked })
+  if (!persist.checked) return
+
+  try {
+    const tab = await currentTab()
+    if (tab?.id && !(await isActive(tab.id))) await toggle(tab.id)
+  } catch {
+    // The preference still applies to the next supported page.
+  }
+  await render()
+})
+
+chrome.storage.sync.get("persistAcrossPages").then(({ persistAcrossPages = false }) => {
+  persist.checked = persistAcrossPages
+})
+render()

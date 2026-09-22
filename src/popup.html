@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>Bionic reading</h1>
-      <button id="bionic_reading_btn">Activate</button>
-      <p>
-        made by
-        <a target="_blank" href="https://www.aktoriukas.com/"> @aktoriukas </a>
-      </p>
-    </div>
+    <main>
+      <h1>Bionic Reading</h1>
+      <button id="bionic_reading_btn">Turn on</button>
+      <label>
+        <span>Keep enabled on new pages</span>
+        <input id="persist_across_pages" type="checkbox" />
+      </label>
+      <p>Shortcut <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd></p>
+    </main>
     <script src="index.js"></script>
   </body>
 </html>
