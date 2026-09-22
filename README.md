@@ -71,3 +71,7 @@ it stores only the persistence preference in Chrome's synced extension storage.
 ## License
 
 [MIT](LICENSE) © Gediminas Strumila — made by [@aktoriukas](https://www.aktoriukas.com/).
+
+## Privacy
+
+[Privacy policy](PRIVACY.md)
