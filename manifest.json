@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bionic Reading",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Make your reading experience more comfortable",
   "icons": {
     "128": "icon128.png",
@@ -11,9 +11,17 @@
   "background": {
     "service_worker": "src/bg.js"
   },
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://*/*"],
   "action": {
     "default_popup": "src/popup.html"
+  },
+  "commands": {
+    "toggle-bionic-reading": {
+      "suggested_key": {
+        "default": "Alt+Shift+B"
+      },
+      "description": "Toggle Bionic Reading on the current page"
+    }
   }
 }
